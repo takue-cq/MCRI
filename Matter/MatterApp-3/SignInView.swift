@@ -18,7 +18,7 @@ struct SignInView: View {
                 VStack(spacing: 14) {
                     TextField("Email", text: $email)
                         .textFieldStyle(.plain)
-                        .padding(14)
+                        .padding(15)
                         .background(Theme.textWhite.opacity(0.9))
                         .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
                         .autocapitalization(.none)
