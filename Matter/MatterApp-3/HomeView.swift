@@ -50,7 +50,7 @@ struct HomeView: View {
                 .padding(.bottom, 60)
             }
         }
-        .navigationBarHidden(true)
+        .toolbar(.hidden, for: .navigationBar)
     }
 }
 
