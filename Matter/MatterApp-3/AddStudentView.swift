@@ -9,7 +9,7 @@ struct AddStudentView: View {
     @State private var bio = ""
     @State private var skills = ""
     @State private var phase = 1
-    @State private var gender = ""
+    @State private var gender = "Male"
     @State private var funFact = ""
     @State private var showingAlert = false
     @State private var alertMessage = ""
@@ -31,10 +31,10 @@ struct AddStudentView: View {
 
                             TextField("Full name", text: $name)
                                 .font(.system(size: 16))
-                                .foregroundColor(Theme.textWhite)
+                                .foregroundColor(Color.black)
                                 .textFieldStyle(.plain)
                                 .padding(15)
-                                .background(Theme.textWhite.opacity(0.9))
+                                .background(Theme.inputBackground)
                                 .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
                         }
 
@@ -46,10 +46,10 @@ struct AddStudentView: View {
 
                             TextField("Email address", text: $email)
                                 .font(.system(size: 16))
-                                .foregroundColor(Theme.textWhite)
+                                .foregroundColor(Color.black)
                                 .textFieldStyle(.plain)
                                 .padding(15)
-                                .background(Theme.textWhite.opacity(0.9))
+                                .background(Theme.inputBackground)
                                 .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
                                 .autocapitalization(.none)
                                 .keyboardType(.emailAddress)
@@ -63,10 +63,10 @@ struct AddStudentView: View {
 
                             TextEditor(text: $bio)
                                 .font(.system(size: 16))
-                                .foregroundColor(Theme.textWhite)
+                                .foregroundColor(Color.black)
                                 .frame(minHeight: 80)
                                 .padding(15)
-                                .background(Theme.textWhite.opacity(0.9))
+                                .background(Theme.inputBackground)
                                 .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
                                 .scrollContentBackground(.hidden)
                         }
@@ -79,10 +79,10 @@ struct AddStudentView: View {
 
                             TextField("Skills (comma separated)", text: $skills)
                                 .font(.system(size: 16))
-                                .foregroundColor(Theme.textWhite)
+                                .foregroundColor(Color.black)
                                 .textFieldStyle(.plain)
                                 .padding(15)
-                                .background(Theme.textWhite.opacity(0.9))
+                                .background(Theme.inputBackground)
                                 .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
                                 .autocapitalization(.none)
                         }
@@ -107,13 +107,11 @@ struct AddStudentView: View {
                                 .foregroundColor(Theme.textWhite.opacity(0.7))
                                 .textCase(.uppercase)
 
-                            TextField("Gender", text: $gender)
-                                .font(.system(size: 16))
-                                .foregroundColor(Theme.textWhite)
-                                .textFieldStyle(.plain)
-                                .padding(15)
-                                .background(Theme.textWhite.opacity(0.9))
-                                .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+                            Picker("Gender", selection: $gender) {
+                                Text("Male").tag("Male")
+                                Text("Female").tag("Female")
+                            }
+                            .pickerStyle(.segmented)
                         }
 
                         VStack(alignment: .leading, spacing: 8) {
@@ -124,10 +122,10 @@ struct AddStudentView: View {
 
                             TextEditor(text: $funFact)
                                 .font(.system(size: 16))
-                                .foregroundColor(Theme.textWhite)
+                                .foregroundColor(Color.black)
                                 .frame(minHeight: 60)
                                 .padding(15)
-                                .background(Theme.textWhite.opacity(0.9))
+                                .background(Theme.inputBackground)
                                 .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
                                 .scrollContentBackground(.hidden)
                         }

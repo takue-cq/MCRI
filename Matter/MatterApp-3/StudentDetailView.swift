@@ -68,12 +68,12 @@ struct StudentDetailView: View {
                         } else {
                             Text(student.name)
                                 .font(.system(size: 28, weight: .bold))
-                                .foregroundColor(Theme.textWhite)
+                                .foregroundColor(Theme.textPrimary)
                         }
 
                         Text("Cohort \(student.cohort) • Phase \(student.phase)")
                             .font(.system(size: 16, weight: .medium))
-                            .foregroundColor(Theme.textWhite.opacity(0.8))
+                            .foregroundColor(Theme.textSecondary)
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
 
@@ -87,14 +87,14 @@ struct StudentDetailView: View {
                         if isEditing {
                             TextField("Email", text: $student.email)
                                 .font(.system(size: 16))
-                                .foregroundColor(Theme.textWhite)
+                                .foregroundColor(Theme.textPrimary)
                                 .textFieldStyle(.plain)
                                 .autocapitalization(.none)
                                 .keyboardType(.emailAddress)
                         } else {
                             Text(student.email)
                                 .font(.system(size: 16))
-                                .foregroundColor(Theme.textWhite)
+                                .foregroundColor(Theme.textPrimary)
                         }
                     }
                     .padding(16)
@@ -111,13 +111,13 @@ struct StudentDetailView: View {
                         if isEditing {
                             TextEditor(text: $student.bio)
                                 .font(.system(size: 16))
-                                .foregroundColor(Theme.textWhite)
+                                .foregroundColor(Theme.textPrimary)
                                 .frame(minHeight: 80)
                                 .scrollContentBackground(.hidden)
                         } else {
                             Text(student.bio)
                                 .font(.system(size: 16))
-                                .foregroundColor(Theme.textWhite)
+                                .foregroundColor(Theme.textPrimary)
                                 .lineSpacing(4)
                         }
                     }
@@ -138,7 +138,7 @@ struct StudentDetailView: View {
                                 set: { student.skills = $0.split(separator: ",").map { $0.trimmingCharacters(in: .whitespaces) } }
                             ))
                             .font(.system(size: 16))
-                            .foregroundColor(Theme.textWhite)
+                            .foregroundColor(Theme.textPrimary)
                             .textFieldStyle(.plain)
                             .autocapitalization(.none)
                         } else {
@@ -169,12 +169,12 @@ struct StudentDetailView: View {
                         if isEditing {
                             TextField("Gender", text: $student.gender)
                                 .font(.system(size: 16))
-                                .foregroundColor(Theme.textWhite)
+                                .foregroundColor(Theme.textPrimary)
                                 .textFieldStyle(.plain)
                         } else {
                             Text(student.gender)
                                 .font(.system(size: 16))
-                                .foregroundColor(Theme.textWhite)
+                                .foregroundColor(Theme.textPrimary)
                         }
                     }
                     .padding(16)
@@ -191,13 +191,13 @@ struct StudentDetailView: View {
                         if isEditing {
                             TextEditor(text: $student.funFact)
                                 .font(.system(size: 16))
-                                .foregroundColor(Theme.textWhite)
+                                .foregroundColor(Theme.textPrimary)
                                 .frame(minHeight: 60)
                                 .scrollContentBackground(.hidden)
                         } else {
                             Text(student.funFact)
                                 .font(.system(size: 16))
-                                .foregroundColor(Theme.textWhite)
+                                .foregroundColor(Theme.textPrimary)
                                 .lineSpacing(4)
                         }
                     }
@@ -222,7 +222,7 @@ struct StudentDetailView: View {
                         } else {
                             Text("Phase \(student.phase) of 6")
                                 .font(.system(size: 16))
-                                .foregroundColor(Theme.textWhite)
+                                .foregroundColor(Theme.textPrimary)
                         }
                     }
                     .padding(16)
@@ -240,7 +240,7 @@ struct StudentDetailView: View {
 
                             Text("View Progress")
                                 .font(.system(size: 16, weight: .semibold))
-                                .foregroundColor(Theme.textWhite)
+                                .foregroundColor(Theme.textPrimary)
 
                             Spacer()
 

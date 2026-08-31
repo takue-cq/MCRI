@@ -26,10 +26,10 @@ struct AddStaffView: View {
 
                             TextField("Full name", text: $name)
                                 .font(.system(size: 16))
-                                .foregroundColor(Theme.textWhite)
+                                .foregroundColor(Color.black)
                                 .textFieldStyle(.plain)
                                 .padding(15)
-                                .background(Theme.textWhite.opacity(0.9))
+                                .background(Theme.inputBackground)
                                 .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
                         }
 
@@ -41,10 +41,10 @@ struct AddStaffView: View {
 
                             TextField("Job title", text: $role)
                                 .font(.system(size: 16))
-                                .foregroundColor(Theme.textWhite)
+                                .foregroundColor(Color.black)
                                 .textFieldStyle(.plain)
                                 .padding(15)
-                                .background(Theme.textWhite.opacity(0.9))
+                                .background(Theme.inputBackground)
                                 .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
                         }
 
@@ -56,10 +56,10 @@ struct AddStaffView: View {
 
                             TextField("Email address", text: $email)
                                 .font(.system(size: 16))
-                                .foregroundColor(Theme.textWhite)
+                                .foregroundColor(Color.black)
                                 .textFieldStyle(.plain)
                                 .padding(15)
-                                .background(Theme.textWhite.opacity(0.9))
+                                .background(Theme.inputBackground)
                                 .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
                                 .autocapitalization(.none)
                                 .keyboardType(.emailAddress)
@@ -73,10 +73,10 @@ struct AddStaffView: View {
 
                             TextEditor(text: $bio)
                                 .font(.system(size: 16))
-                                .foregroundColor(Theme.textWhite)
+                                .foregroundColor(Color.black)
                                 .frame(minHeight: 100)
                                 .padding(15)
-                                .background(Theme.textWhite.opacity(0.9))
+                                .background(Theme.inputBackground)
                                 .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
                                 .scrollContentBackground(.hidden)
                         }

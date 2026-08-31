@@ -18,16 +18,18 @@ struct SignInView: View {
                 VStack(spacing: 14) {
                     TextField("Email", text: $email)
                         .textFieldStyle(.plain)
+                        .foregroundColor(Color.black)
                         .padding(15)
-                        .background(Theme.textWhite.opacity(0.9))
+                        .background(Theme.inputBackground)
                         .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
                         .autocapitalization(.none)
                         .keyboardType(.emailAddress)
 
                     SecureField("Password", text: $password)
                         .textFieldStyle(.plain)
+                        .foregroundColor(Color.black)
                         .padding(14)
-                        .background(Theme.textWhite.opacity(0.9))
+                        .background(Theme.inputBackground)
                         .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
                 }
                 .padding(.horizontal, 24)

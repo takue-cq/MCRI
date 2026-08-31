@@ -39,7 +39,7 @@ struct CohortDetailView: View {
 
                                     Text(student.name)
                                         .font(.system(size: 16, weight: .medium))
-                                        .foregroundColor(Theme.textWhite)
+                                        .foregroundColor(Theme.textPrimary)
 
                                     Spacer()
 

@@ -43,7 +43,7 @@ struct ProgressGraphView: View {
                         HStack(spacing: 16) {
                             Text("Phase \(student.phase) of 6")
                                 .font(.system(size: 24, weight: .bold))
-                                .foregroundColor(Theme.textWhite)
+                                .foregroundColor(Theme.textPrimary)
 
                             Spacer()
 
@@ -121,7 +121,7 @@ struct ProgressGraphView: View {
 
                         Text(getPhaseDescription(for: student.phase))
                             .font(.system(size: 15))
-                            .foregroundColor(Theme.textWhite)
+                            .foregroundColor(Theme.textPrimary)
                             .lineSpacing(4)
                     }
                     .padding(16)
@@ -178,7 +178,7 @@ struct PhaseRow: View {
                 } else {
                     Text("\(phaseNumber)")
                         .font(.system(size: 14, weight: .semibold))
-                        .foregroundColor(Theme.textWhite.opacity(0.6))
+                        .foregroundColor(Theme.textTertiary)
                 }
             }
 
@@ -186,7 +186,7 @@ struct PhaseRow: View {
             VStack(alignment: .leading, spacing: 2) {
                 Text(phaseName)
                     .font(.system(size: 16, weight: isCurrent ? .semibold : .medium))
-                    .foregroundColor(isCompleted ? Theme.textWhite : Theme.textWhite.opacity(0.5))
+                    .foregroundColor(isCompleted ? Theme.textPrimary : Theme.textTertiary)
 
                 if isCurrent {
                     Text("Current Phase")

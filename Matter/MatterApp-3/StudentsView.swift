@@ -37,11 +37,11 @@ struct StudentsView: View {
 
                             Text("No cohorts yet")
                                 .font(.system(size: 18, weight: .medium))
-                                .foregroundColor(Theme.textWhite.opacity(0.6))
+                                .foregroundColor(Theme.textSecondary)
 
                             Text("Tap the + button to create your first cohort")
                                 .font(.system(size: 14))
-                                .foregroundColor(Theme.textWhite.opacity(0.5))
+                                .foregroundColor(Theme.textTertiary)
                         }
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 60)

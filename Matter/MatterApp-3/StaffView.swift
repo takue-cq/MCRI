@@ -31,10 +31,10 @@ struct StaffView: View {
                             VStack(alignment: .leading, spacing: 4) {
                                 Text(staffMember.name)
                                     .font(.system(size: 16, weight: .medium))
-                                    .foregroundColor(Theme.textWhite)
+                                    .foregroundColor(Theme.textPrimary)
                                 Text(staffMember.role)
                                     .font(.system(size: 14))
-                                    .foregroundColor(Theme.textWhite.opacity(0.7))
+                                    .foregroundColor(Theme.textSecondary)
                             }
 
                             Spacer()
