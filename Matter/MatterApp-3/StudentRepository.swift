@@ -226,6 +226,11 @@ class StudentRepository {
         students.append(contentsOf: sampleStudents)
         saveStudents()
     }
+
+    func deleteCohort(cohortNumber: Int) {
+        students.removeAll { $0.cohort == cohortNumber }
+        saveStudents()
+    }
     
     private func deleteStudentFromAPI(id: UUID) {
         guard let url = URL(string: APIConfig.studentEndpoint(id: id.uuidString)) else { return }

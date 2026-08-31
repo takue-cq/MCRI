@@ -5,11 +5,21 @@ struct StudentsView: View {
     private let columns = [GridItem(.flexible()), GridItem(.flexible())]
     @State private var showingAddCohortAlert = false
     @State private var newCohortNumber = ""
+    @State private var cohortToDelete: Int?
 
     private var availableCohorts: [Int] {
         let allStudents = StudentRepository.shared.getAllStudents()
         let uniqueCohorts = Set(allStudents.map { $0.cohort })
         return uniqueCohorts.sorted()
+    }
+
+    private var deleteButton: some View {
+        Image(systemName: "trash.fill")
+            .font(.system(size: 14))
+            .foregroundColor(Theme.textWhite.opacity(0.6))
+            .padding(8)
+            .background(Color.black.opacity(0.3))
+            .clipShape(Circle())
     }
 
     var body: some View {
@@ -48,10 +58,19 @@ struct StudentsView: View {
                     } else {
                         LazyVGrid(columns: columns, spacing: 16) {
                             ForEach(availableCohorts, id: \.self) { number in
-                                NavigationLink {
-                                    CohortDetailView(cohortNumber: number)
-                                } label: {
-                                    CohortTile(number: number)
+                                ZStack(alignment: .topTrailing) {
+                                    NavigationLink {
+                                        CohortDetailView(cohortNumber: number)
+                                    } label: {
+                                        CohortTile(number: number)
+                                    }
+
+                                    Button {
+                                        cohortToDelete = number
+                                    } label: {
+                                        deleteButton
+                                    }
+                                    .padding(8)
                                 }
                             }
                         }
@@ -77,6 +96,22 @@ struct StudentsView: View {
             }
         } message: {
             Text("Enter the cohort number to create a new cohort with sample students.")
+        }
+        .alert("Delete Cohort", isPresented: .constant(cohortToDelete != nil)) {
+            Button("Cancel", role: .cancel) {
+                cohortToDelete = nil
+            }
+            Button("Delete", role: .destructive) {
+                if let cohortToDelete = cohortToDelete {
+                    StudentRepository.shared.deleteCohort(cohortNumber: cohortToDelete)
+                    self.cohortToDelete = nil
+                }
+            }
+        } message: {
+            if let cohortToDelete = cohortToDelete {
+                let studentCount = StudentRepository.shared.getStudents(byCohort: cohortToDelete).count
+                Text("Are you sure you want to delete Cohort \(cohortToDelete)? This will remove \(studentCount) student(s).")
+            }
         }
     }
 }
