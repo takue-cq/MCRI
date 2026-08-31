@@ -195,10 +195,36 @@ class StudentRepository {
     func deleteStudent(byId id: UUID) {
         students.removeAll { $0.id == id }
         saveStudents()
-        
+
         if useAPI {
             deleteStudentFromAPI(id: id)
         }
+    }
+
+    func createCohort(cohortNumber: Int) {
+        // Check if cohort already exists
+        let existingStudents = students.filter { $0.cohort == cohortNumber }
+        if !existingStudents.isEmpty {
+            return // Cohort already has students
+        }
+
+        // Create sample students for the new cohort
+        let sampleStudents = (1...8).map { index in
+            Student(
+                name: "Student \(cohortNumber)-\(index)",
+                imageName: "person.crop.circle.fill",
+                email: "student\(cohortNumber)-\(index)@example.com",
+                bio: "Passionate learner in Cohort \(cohortNumber). Currently developing skills in mobile development and design.",
+                skills: ["Swift", "SwiftUI", "Design"],
+                cohort: cohortNumber,
+                phase: Int.random(in: 1...6),
+                gender: index % 2 == 0 ? "Female" : "Male",
+                funFact: "I love coding and coffee!"
+            )
+        }
+
+        students.append(contentsOf: sampleStudents)
+        saveStudents()
     }
     
     private func deleteStudentFromAPI(id: UUID) {

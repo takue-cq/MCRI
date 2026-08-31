@@ -1,10 +1,9 @@
 import SwiftUI
 
 struct StaffView: View {
-    private let staff = [
-        "Program Director", "Career Coach", "Curriculum Lead",
-        "Industry Partnerships", "Student Success Advisor"
-    ]
+    @State private var staff: [Staff] = []
+    @State private var showingAddStaffSheet = false
+    @State private var staffToDelete: Staff?
 
     var body: some View {
         ZStack {
@@ -13,18 +12,40 @@ struct StaffView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 18) {
                     MatterHeader(title: "Staff", subtitle: "Meet the Matter team")
+                        .overlay(alignment: .topTrailing) {
+                            Button {
+                                showingAddStaffSheet = true
+                            } label: {
+                                Image(systemName: "plus.circle.fill")
+                                    .font(.system(size: 24))
+                                    .foregroundColor(Theme.textWhite)
+                            }
+                        }
 
-                    ForEach(staff, id: \.self) { role in
+                    ForEach(staff) { staffMember in
                         HStack(spacing: 14) {
-                            Image(systemName: "person.crop.circle.fill")
+                            Image(systemName: staffMember.imageName)
                                 .font(.system(size: 30))
                                 .foregroundColor(Theme.textWhite.opacity(0.85))
 
-                            Text(role)
-                                .font(.system(size: 16, weight: .medium))
-                                .foregroundColor(Theme.textWhite)
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text(staffMember.name)
+                                    .font(.system(size: 16, weight: .medium))
+                                    .foregroundColor(Theme.textWhite)
+                                Text(staffMember.role)
+                                    .font(.system(size: 14))
+                                    .foregroundColor(Theme.textWhite.opacity(0.7))
+                            }
 
                             Spacer()
+
+                            Button {
+                                staffToDelete = staffMember
+                            } label: {
+                                Image(systemName: "trash.fill")
+                                    .font(.system(size: 16))
+                                    .foregroundColor(Theme.textWhite.opacity(0.6))
+                            }
                         }
                         .padding(14)
                         .background(Theme.textWhite.opacity(0.12))
@@ -37,6 +58,32 @@ struct StaffView: View {
         .navigationTitle("")
         .navigationBarTitleDisplayMode(.inline)
         .toolbarColorScheme(.dark, for: .navigationBar)
+        .sheet(isPresented: $showingAddStaffSheet) {
+            AddStaffView()
+        }
+        .alert("Delete Staff", isPresented: .constant(staffToDelete != nil)) {
+            Button("Cancel", role: .cancel) {
+                staffToDelete = nil
+            }
+            Button("Delete", role: .destructive) {
+                if let staffToDelete = staffToDelete {
+                    StaffRepository.shared.deleteStaff(byId: staffToDelete.id)
+                    loadStaff()
+                }
+                staffToDelete = nil
+            }
+        } message: {
+            if let staffToDelete = staffToDelete {
+                Text("Are you sure you want to delete \(staffToDelete.name)?")
+            }
+        }
+        .onAppear {
+            loadStaff()
+        }
+    }
+
+    private func loadStaff() {
+        staff = StaffRepository.shared.getAllStaff()
     }
 }
 
