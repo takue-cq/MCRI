@@ -3,13 +3,14 @@ import PhotosUI
 
 struct StudentDetailView: View {
     @State private var student: Student
+    @State private var originalStudent: Student
     @State private var isEditing = false
     @State private var selectedPhoto: PhotosPickerItem?
     @State private var profileImage: Image?
-    @Environment(\.dismiss) private var dismiss
 
     init(student: Student) {
         _student = State(initialValue: student)
+        _originalStudent = State(initialValue: student)
     }
 
     var body: some View {
@@ -260,31 +261,19 @@ struct StudentDetailView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbarColorScheme(.dark, for: .navigationBar)
         .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                Button {
-                    dismiss()
-                } label: {
-                    HStack(spacing: 4) {
-                        Image(systemName: "chevron.left")
-                        Text("Back")
-                    }
-                    .font(.system(size: 16, weight: .medium))
-                    .foregroundColor(Theme.textWhite)
-                }
-            }
-
             ToolbarItem(placement: .navigationBarTrailing) {
                 if isEditing {
                     HStack(spacing: 16) {
                         Button("Cancel") {
+                            student = originalStudent
                             isEditing = false
                             profileImage = nil
                         }
                         .foregroundColor(Theme.textWhite.opacity(0.8))
 
                         Button("Save") {
+                            StudentRepository.shared.updateStudent(student)
                             isEditing = false
-                            // TODO: Save to backend/database
                         }
                         .foregroundColor(Theme.matterOrange)
                         .fontWeight(.semibold)

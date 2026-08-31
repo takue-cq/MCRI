@@ -3,21 +3,8 @@ import SwiftUI
 struct CohortDetailView: View {
     let cohortNumber: Int
 
-    // Placeholder roster — replace with real data source (API, JSON, etc.)
     private var students: [Student] {
-        (1...8).map { index in
-            Student(
-                name: "Student \(index)",
-                imageName: "person.crop.circle.fill",
-                email: "student\(index)@example.com",
-                bio: "Passionate learner in Cohort \(cohortNumber). Currently developing skills in mobile development and design.",
-                skills: ["Swift", "SwiftUI", "Design"],
-                cohort: cohortNumber,
-                phase: Int.random(in: 1...6),
-                gender: index % 2 == 0 ? "Female" : "Male",
-                funFact: "I love coding and coffee!"
-            )
-        }
+        StudentRepository.shared.getStudents(byCohort: cohortNumber)
     }
 
     var body: some View {

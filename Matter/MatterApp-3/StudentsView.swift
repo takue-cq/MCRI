@@ -4,6 +4,12 @@ struct StudentsView: View {
     private let cohorts = Array(1...7)
     private let columns = [GridItem(.flexible()), GridItem(.flexible())]
 
+    private var availableCohorts: [Int] {
+        let allStudents = StudentRepository.shared.getAllStudents()
+        let uniqueCohorts = Set(allStudents.map { $0.cohort })
+        return uniqueCohorts.sorted()
+    }
+
     var body: some View {
         ZStack {
             IconGridBackground()
@@ -13,7 +19,7 @@ struct StudentsView: View {
                     MatterHeader(title: "Students", subtitle: "Select a cohort to explore")
 
                     LazyVGrid(columns: columns, spacing: 16) {
-                        ForEach(cohorts, id: \.self) { number in
+                        ForEach(availableCohorts, id: \.self) { number in
                             NavigationLink {
                                 CohortDetailView(cohortNumber: number)
                             } label: {
