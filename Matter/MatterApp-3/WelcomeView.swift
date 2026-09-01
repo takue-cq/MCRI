@@ -1,16 +1,32 @@
 import SwiftUI
 
+import SwiftUI
+
 struct WelcomeView: View {
+    
     var body: some View {
         ZStack {
+            
             Image("WelcomeBackground")
                 .resizable()
                 .ignoresSafeArea()
-
+            
             VStack(spacing: 18) {
+                
                 Spacer()
                 Spacer()
-
+               
+                Text(Date(), style: .time)
+                    .font(.system(size: 42, weight: .bold))
+                    .foregroundColor(Theme.textWhite)
+                
+                
+                Text(Date(), style: .date)
+                    .font(.system(size: 18, weight: .medium))
+                    .foregroundColor(Theme.textWhite)
+                Spacer()
+                Spacer()
+                
                 NavigationLink {
                     HomeView()
                 } label: {
@@ -20,7 +36,12 @@ struct WelcomeView: View {
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 16)
                         .background(Theme.textWhite)
-                        .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+                        .clipShape(
+                            RoundedRectangle(
+                                cornerRadius: 14,
+                                style: .continuous
+                            )
+                        )
                 }
                 .padding(.horizontal, 32)
                 .padding(.bottom, 50)
@@ -31,5 +52,7 @@ struct WelcomeView: View {
 }
 
 #Preview {
-    NavigationStack { WelcomeView() }
+    NavigationStack {
+        WelcomeView()
+    }
 }
